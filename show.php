@@ -23,6 +23,7 @@
         $user = $response -> getGraphUser();
         echo 'ID: ' . $user -> getId() . '<br>';
         echo 'Name: ' . $user -> getName() . '<br>';
+        echo '<img src="//graph.facebook.com/"' . $user -> getId() . '"/picture">';
     } else {
         echo 'Failed to retrieve accessToken';
     }
@@ -30,11 +31,78 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title></title>
-    </head>
-    <body>
-        
-    </body>
+<head>
+	<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Search and Share YouTube Videos</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<link href='https://fonts.googleapis.com/css?family=Roboto:200,300,400,700' rel='stylesheet' type='text/css'>
+	<link rel="import" href="bower_components/paper-input/paper-input.html">
+	<link rel="import" href="bower_components/paper-button/paper-button.html">
+	<link rel="import" href="bower_components/paper-card/paper-card.html">
+	<link rel="import" href="bower_components/iron-form/iron-form.html">
+</head>
+<body class="container bg-faded bg-frame">
+    <paper-input label="what kind of videos you are interested in?">
+        <iron-icon icon="search" prefix></iron-icon>
+    </paper-input>
+	<div class="footer mb-3">
+		<span>&copy; Derek Mingyu MA. An assignment for COMP3121. <a href="https://github.com/derekmma/search-and-share-YouTube-videos">Use my code.</a></span>
+	</div>
+	
+	<style is="custom-style">
+	  paper-button.custom {
+	    --paper-button-ink-color: var(--paper-pink-a200);
+	    /* These could also be individually defined for each of the
+	      specific css classes, but we'll just do it once as an example */
+	    --paper-button-flat-keyboard-focus: {
+	      background-color: var(--paper-pink-a200);
+	      color: white !important;
+	    };
+	    --paper-button-raised-keyboard-focus: {
+	      background-color: var(--paper-pink-a200) !important;
+	      color: white !important;
+	    };
+	  }
+	  paper-button.custom:hover {
+	    background-color: var(--paper-indigo-100);
+	  }
+	  paper-button.pink {
+	    color: var(--paper-indigo-500);
+	  }
+	  paper-button.indigo {
+	    background-color: var(--paper-indigo-500);
+	    color: white;
+	    --paper-button-raised-keyboard-focus: {
+	      background-color: var(--paper-pink-a200) !important;
+	      color: white !important;
+	    };
+	  }
+	  
+	  paper-card {
+	  	max-width: 100%;
+	  }
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	<script src="js/base.js" type="text/javascript" chatset="utf-8"></script>
+	<script>
+    	// To ensure that elements are ready on polyfilled browsers, 
+    	// wait for WebComponentsReady. 
+    	document.addEventListener('WebComponentsReady', function() {
+        	var input = document.querySelector('paper-input');
+        	var button = document.querySelector('paper-button');
+        	var button = document.querySelector('iron-form');
+        	var greeting = document.getElementById("greeting");
+        	button.addEventListener('click', function() {
+          		greeting.textContent = 'Hello, ' + input.value;
+        	});
+      	});
+	</script>
+	
+	
+</body>
 </html>
