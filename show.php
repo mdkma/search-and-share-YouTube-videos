@@ -44,13 +44,28 @@
 	<link rel="import" href="bower_components/paper-button/paper-button.html">
 	<link rel="import" href="bower_components/paper-card/paper-card.html">
 	<link rel="import" href="bower_components/iron-form/iron-form.html">
+    <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+    <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+    <link rel="import" href="bower_components/paper-item/paper-item.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
 </head>
 <body class="container bg-faded bg-frame">
-    <paper-input label="what kind of videos you are interested in?">
-        <iron-icon icon="search" prefix></iron-icon>
-    </paper-input>
+    <div class="row justify-content-between">
+        <paper-input label="What kind of videos you are interested in?" class="col-6">
+            <iron-icon icon="search" prefix></iron-icon>
+        </paper-input>
+        <paper-dropdown-menu label="Sort by" class="col-3">
+            <paper-listbox class="dropdown-content" selected="1">
+                <paper-item>Sort by 1</paper-item>
+                <paper-item>Sort by 2</paper-item>
+            </paper-listbox>
+        </paper-dropdown-menu>
+        <paper-button raised id="submitButton" onclick="" class="col-2 custom indigo">
+            Search
+        </paper-button>
+    </div>
 	<div class="footer mb-3">
-		<span>&copy; Derek Mingyu MA. An assignment for COMP3121. <a href="https://github.com/derekmma/search-and-share-YouTube-videos">Use my code.</a></span>
+		<span>&copy; <a href="http://derek.ma">Derek Mingyu MA</a>. An assignment for PolyU COMP COMP3121. <a href="https://github.com/derekmma/search-and-share-YouTube-videos">Use my code</a>.</span>
 	</div>
 	
 	<style is="custom-style">
