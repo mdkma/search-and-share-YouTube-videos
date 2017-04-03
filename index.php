@@ -4,7 +4,7 @@
     session_start();
     
     // Load Facebook SDK with autoloading
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/14110562d/php-graph-sdk-5.0.0/src/Facebook/autoload.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/COMP3121/Facebook/src/Facebook/autoload.php';
 
     // Configure Facebook App ID and App Secret
     $fb = new Facebook\Facebook([
@@ -15,6 +15,7 @@
     
     // Retrieve helper instance which store the CSRF values in session
     $helper = $fb->getRedirectLoginHelper();
+    $permissions = ['email', 'user_birthday'];
 
     try {
         $accessToken = $helper -> getAccessToken();
@@ -35,8 +36,8 @@
         $_SESSION['facebook_access_token'] = (string) $accessToken;
     } else {
         // Provide the login link since access token is not found
-        $callback = 'http://localhost/14110562d/index.php';
-        $loginUrl = $helper->getLoginUrl($callback);
+        $callback = 'http://localhost/14110562d/show.php';
+        $loginUrl = $helper->getLoginUrl($callback, $permissions);
         echo '<br><a href="' . $loginUrl . '">Log in with Facebook</a></br>';
     }
     
