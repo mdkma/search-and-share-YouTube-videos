@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="stylesheet" media="screen" href="css/base.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<meta charset="UTF-8">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="bower_components/paper-item/paper-item.html">
+<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+<title>Profile</title>
+</head>
+<body>
+<p class="thin">Manage Your Profile</p>
+
+<p class="sub-thin">Account Information</p>
+<div id="status1"></div>
+<form is="iron-form" id="profileForm" method="post" action="/ai3-web-app/Info" class="item">
+		<paper-input id="user-info-email" class="col" name="email" label="Your Email" auto-validate pattern=".+[@].+[.].+" error-message="Please input a valid email!" required></paper-input>
+		<paper-input id="user-info-name" class="col" name="name" label="Your Name" auto-validate></paper-input>
+		<paper-input id="user-info-mobile" class="col" type="number" name="mobile" label="Your Mobile Number(numeric only)" char-counter></paper-input>
+		<paper-input id="user-info-industry" class="col" name="industry" label="Your Industry"></paper-input>
+	
+	<paper-dropdown-menu label="Industry">
+  		<paper-listbox class="dropdown-content">
+    		<paper-item>Research institute</paper-item>
+    		<paper-item>Government</paper-item>
+    		<paper-item>University researcher</paper-item>
+    		<paper-item>Others</paper-item>
+  		</paper-listbox>
+	</paper-dropdown-menu>
+	
+	<paper-input id="user-info-email-origin" class="col" name="email-origin" hidden></paper-input>
+	<div class="row">
+		<paper-button raised onclick="submitProfile()" disabled id="profileModifyButton" class="mt-2">
+			Modify
+    	</paper-button>
+    	<div id="status2"></div>
+	</div>
+</form>
+<p class="sub-thin mt-2">Change Your Password</p>
+<form is="iron-form" id="changePasswordForm" method="post" action="/ai3-web-app/Password" class="item">
+		<paper-input id="user-info-oldpw" class="col" name="oldpw" label="Your Current Pasword" auto-validate required></paper-input>
+		<paper-input id="user-info-newpw" class="col" name="newpw" label="New Password You Want" auto-validate required></paper-input>
+	<div class="row">
+		<paper-button raised onclick="submitNewPassword()" disabled id="changePasswordFormButton" class="mt-2">
+			Change
+    	</paper-button>
+    	<div id="status3"></div>
+	</div>
+</form>
+
+
+
+</body>
+
+
+	<style is="custom-style">
+		paper-button.custom {
+	    --paper-button-ink-color: var(--paper-pink-a200);
+	    /* These could also be individually defined for each of the
+	      specific css classes, but we'll just do it once as an example */
+	    --paper-button-flat-keyboard-focus: {
+	      background-color: var(--paper-pink-a200);
+	      color: white !important;
+	    };
+	    --paper-button-raised-keyboard-focus: {
+	      background-color: var(--paper-pink-a200) !important;
+	      color: white !important;
+	    };
+	  }
+	  paper-button.custom:hover {
+	    background-color: var(--paper-indigo-100);
+	  }
+	  paper-button.pink {
+	    color: var(--paper-indigo-500);
+	  }
+	  paper-button.indigo {
+	    background-color: var(--paper-indigo-500);
+	    color: white;
+	    --paper-button-raised-keyboard-focus: {
+	      background-color: var(--paper-pink-a200) !important;
+	      color: white !important;
+	    };
+	  }
+	</style>
+
+<script src="js/base.js" type="text/javascript" chatset="utf-8"></script>
+<script>
+$(document).ready(function(){
+	loadProfileContent();
+});
+
+profileForm.addEventListener('change', function(event) {
+    // Validate the entire form to see if we should enable the `Submit` button.
+   	profileModifyButton.disabled = false;
+  });
+  
+changePasswordForm.addEventListener('change', function(event) {
+    // Validate the entire form to see if we should enable the `Submit` button.
+   	changePasswordFormButton.disabled = false;
+  });
+
+
+</script>
+
+</html>

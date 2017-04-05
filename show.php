@@ -33,23 +33,18 @@
 <html lang="en">
 <head>
 	<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>Search and Share YouTube Videos</title>
+	<link rel="stylesheet" media="screen" href="css/base.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-	<link href='https://fonts.googleapis.com/css?family=Roboto:200,300,400,700' rel='stylesheet' type='text/css'>
+	<meta charset="UTF-8">
 	<link rel="import" href="bower_components/paper-input/paper-input.html">
-	<link rel="import" href="bower_components/paper-button/paper-button.html">
-	<link rel="import" href="bower_components/paper-card/paper-card.html">
-	<link rel="import" href="bower_components/iron-form/iron-form.html">
-    <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+	<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 	<link rel="import" href="bower_components/paper-item/paper-item.html">
 	<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
-    <link rel="import" href="bower_components/paper-button/paper-button.html">
+	<link rel="import" href="bower_components/paper-button/paper-button.html">
+	<title>Search and Share YouTube Videos</title>
 </head>
 <body class="container bg-faded bg-frame">
+<form is="iron-form" id="searchForm" method="post" action="/ai3-web-app/Info">
     <div class="row justify-content-between">
         <paper-input label="What kind of videos you are interested in?" class="col-6">
             <iron-icon icon="search" prefix></iron-icon>
@@ -64,6 +59,7 @@
             Search
         </paper-button>
     </div>
+</form>
 	<div class="footer mb-3">
 		<span>&copy; <a href="http://derek.ma">Derek Mingyu MA</a>. An assignment for PolyU COMP COMP3121. <a href="https://github.com/derekmma/search-and-share-YouTube-videos">Use my code</a>.</span>
 	</div>
