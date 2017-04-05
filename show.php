@@ -51,8 +51,8 @@
         </paper-input>
         <paper-dropdown-menu label="Sort by" class="col-3">
             <paper-listbox class="dropdown-content">
-                <paper-item>Sort by 1</paper-item>
-                <paper-item>Sort by 2</paper-item>
+                <paper-item>Decreasing like count</paper-item>
+                <paper-item>Hot content score</paper-item>
             </paper-listbox>
         </paper-dropdown-menu>
         <paper-button raised id="submitButton" onclick="" class="col-2 custom indigo">
