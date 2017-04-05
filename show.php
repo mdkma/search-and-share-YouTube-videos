@@ -41,6 +41,8 @@
 	<link rel="import" href="bower_components/paper-item/paper-item.html">
 	<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
 	<link rel="import" href="bower_components/paper-button/paper-button.html">
+	<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+	<link rel="import" href="bower_components/paper-card/paper-card.html">
 	<title>Search and Share YouTube Videos</title>
 </head>
 <body class="container bg-faded bg-frame">
@@ -55,16 +57,33 @@
                 <paper-item>Hot content score</paper-item>
             </paper-listbox>
         </paper-dropdown-menu>
-        <paper-button raised id="submitButton" onclick="" class="col-2 custom indigo">
+        <paper-button raised id="submitButton" onclick="submitForm()" class="col-2 custom indigo">
             Search
         </paper-button>
     </div>
 </form>
-	<div class="footer mb-3">
-		<span>&copy; <a href="http://derek.ma">Derek Mingyu MA</a>. An assignment for PolyU COMP COMP3121. <a href="https://github.com/derekmma/search-and-share-YouTube-videos">Use my code</a>.</span>
+
+<div id="search-result">
+	<paper-card animated-shadow class="record">
+		<div class="record-iframe"></div>
+	<div class="record-content">
+		<div class="card-content">
+			<div class="rate-header">Rate this album</div>
+			<div class="rate-name">Mac Miller</div>
+			<div>Live from space</div>
+		</div>
+		<div class="card-actions">
+			<paper-button>Share to Facebook</paper-button>
+		</div>
 	</div>
+	</paper-card>
+</div
+
+<div class="footer mb-3 mt-3">
+	<span>&copy; <a href="http://derek.ma">Derek Mingyu MA</a>. An assignment for PolyU COMP COMP3121. <a href="https://github.com/derekmma/search-and-share-YouTube-videos">Use my code</a>.</span>
+</div>
 	
-	<style is="custom-style">
+<style is="custom-style">
 	  paper-button.custom {
 	    --paper-button-ink-color: var(--paper-pink-a200);
 	    /* These could also be individually defined for each of the
@@ -92,10 +111,31 @@
 	      color: white !important;
 	    };
 	  }
+
+	paper-card.record { @apply(--layout-horizontal); }
+	.record-iframe {
+		width: 400px;
+		height: 170px;
+		background: url('./donuts.png');
+		background-size: cover;
+	}
+	.record-content {
+		@apply(--layout-flex);
+		float: left;
+	}
+	.rate-header { @apply(--paper-font-headline); }
+	.rate-name { color: var(--paper-grey-600); margin: 10px 0; }
+	paper-icon-button.rate-icon {
+		--iron-icon-fill-color: white;
+		--iron-icon-stroke-color: var(--paper-grey-600);
+	}
 	  
-	  paper-card {
+	paper-card {
 	  	max-width: 100%;
-	  }
+	}
+	paper-card:hover {
+      	@apply(--shadow-elevation-16dp);
+    }
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
