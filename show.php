@@ -37,6 +37,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 	<meta charset="UTF-8">
 	<link rel="import" href="bower_components/iron-icons/social-icons.html">
+	<link rel="import" href="bower_components/iron-icons/iron-icons.html">
 	<link rel="import" href="bower_components/paper-input/paper-input.html">
 	<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 	<link rel="import" href="bower_components/paper-item/paper-item.html">
@@ -49,16 +50,16 @@
 <body class="container bg-faded bg-frame">
 <form is="iron-form" id="searchForm" method="post" action="/ai3-web-app/Info">
     <div class="row justify-content-between">
-        <paper-input label="What kind of videos you are interested in?" class="col-6">
-            <iron-icon icon="search" prefix></iron-icon>
+        <paper-input name="query" label="What kind of videos you are interested in?" class="col-6" required>
+            <iron-icon icon="icons:search" class="mr-2" prefix></iron-icon>
         </paper-input>
-        <paper-dropdown-menu label="Sort by" class="col-3">
+        <paper-dropdown-menu name="method" label="Sort by" class="col-3" required>
             <paper-listbox class="dropdown-content">
                 <paper-item>Decreasing like count</paper-item>
                 <paper-item>Hot content score</paper-item>
             </paper-listbox>
         </paper-dropdown-menu>
-        <paper-button raised id="submitButton" onclick="submitForm()" class="col-2 custom indigo">
+        <paper-button raised id="submitButton" onclick="getSearchResult()" class="col-2 custom indigo">
             Search
         </paper-button>
     </div>
