@@ -36,6 +36,7 @@
 	<link rel="stylesheet" media="screen" href="css/base.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 	<meta charset="UTF-8">
+	<link rel="import" href="bower_components/iron-icons/social-icons.html">
 	<link rel="import" href="bower_components/paper-input/paper-input.html">
 	<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 	<link rel="import" href="bower_components/paper-item/paper-item.html">
@@ -62,8 +63,7 @@
         </paper-button>
     </div>
 </form>
-
-<div id="search-result">
+<div id="search-re sult">
 	<paper-card animated-shadow class="record">
 		<div class="record-iframe"></div>
 	<div class="record-content">
@@ -73,7 +73,10 @@
 			<div>Live from space</div>
 		</div>
 		<div class="card-actions">
-			<paper-button>Share to Facebook</paper-button>
+			<paper-button>
+				<iron-icon icon="social:share" class="mr-2"></iron-icon>
+				Share to Facebook
+			</paper-button>
 		</div>
 	</div>
 	</paper-card>
