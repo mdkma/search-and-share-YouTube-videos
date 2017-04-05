@@ -45,8 +45,8 @@
 	<link rel="import" href="bower_components/paper-card/paper-card.html">
 	<link rel="import" href="bower_components/iron-form/iron-form.html">
     <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
-    <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
-    <link rel="import" href="bower_components/paper-item/paper-item.html">
+	<link rel="import" href="bower_components/paper-item/paper-item.html">
+	<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
     <link rel="import" href="bower_components/paper-button/paper-button.html">
 </head>
 <body class="container bg-faded bg-frame">
@@ -55,7 +55,7 @@
             <iron-icon icon="search" prefix></iron-icon>
         </paper-input>
         <paper-dropdown-menu label="Sort by" class="col-3">
-            <paper-listbox class="dropdown-content" selected="1">
+            <paper-listbox class="dropdown-content">
                 <paper-item>Sort by 1</paper-item>
                 <paper-item>Sort by 2</paper-item>
             </paper-listbox>
