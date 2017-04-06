@@ -64,6 +64,7 @@
         </paper-button>
     </div>
 </form>
+<div id="status"></div>
 <div id="search-re sult">
 	<paper-card animated-shadow class="record">
 		<div class="record-iframe"></div>

@@ -34,7 +34,7 @@ if (isset($_GET['q']) && isset($_GET['maxResults'])) {
    * {{ Google Cloud Console }} <{{ https://cloud.google.com/console }}>
    * Please ensure that you have enabled the YouTube Data API for your project.
    */
-  $DEVELOPER_KEY = 'REPLACE_ME';
+  $DEVELOPER_KEY = 'AIzaSyB6ItIn7rhWcP0eKuhsW_5g930u5sIL0UE';
 
   $client = new Google_Client();
   $client->setDeveloperKey($DEVELOPER_KEY);
@@ -92,13 +92,4 @@ END;
   }
 }
 ?>
-
-<!doctype html>
-<html>
-  <head>
-    <title>YouTube Search</title>
-  </head>
-  <body>
-    <?=$htmlBody?>
-  </body>
-</html>
+<?=$searchResponse?>
