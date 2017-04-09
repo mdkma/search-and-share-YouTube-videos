@@ -1,14 +1,33 @@
 $(document).ready(function(){
 });
-function sortBy(prop){
-   return function(a,b){
-      if( a.viewCount > b.viewCount){
-          return 1;
-      }else if( a.viewCount < b.viewCount ){
-          return -1;
-      }
-      return 0;
-   }
+
+function getEpoch(dt){
+    var parts = dt.match(/(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/);
+    return (Date.UTC(+parts[1], parts[2]-1, +parts[3], +parts[4], +parts[5], +parts[6]))/1000;
+}
+
+function calculateHotScore(jsonData){
+    var newJsonData= new Array();
+    for (i=0; i < jsonData.length; i++) {
+        var jsonData1 = jsonData[i];
+        var ts = getEpoch(jsonData1.publishedAt) - getEpoch("2000-01-01T00:00:00");
+        var x = jsonData1.likeCount - jsonData1.dislikeCount;
+        if (x > 1){
+            var sign = 1;
+        }else if (x < 1){
+            var sign = -1;
+        }else{
+            var sign= 0;
+        }
+        if (Math.abs(x) >= 1){
+            var r = Math.abs(x);
+        }else {
+            var r = 1;
+        }
+        jsonData1.hotScore = (sign*Math.log10(r) + (ts/10000000)).toFixed(4);
+        newJsonData.push(jsonData1);
+    }
+    return newJsonData;
 }
 
 function sortByViewCount(x,y) {
@@ -17,6 +36,10 @@ function sortByViewCount(x,y) {
 
 function sortByLikeCount(x,y) {
     return y.likeCount - x.likeCount;
+}
+
+function sortByHotScore(x,y) {
+    return y.hotScore - x.hotScore;
 }
 
 function getSearchResult(){
@@ -37,9 +60,10 @@ function getSearchResult(){
                 if(sortMethod=='likeCount'){
                     newJsonData.sort(sortByLikeCount);
                 }else if(sortMethod =="hotScore"){
-                    newJsonData.sort(sortByViewCount);
+                    newJsonData = calculateHotScore(newJsonData);
+                    newJsonData.sort(sortByHotScore);
                 }
-                document.getElementById("status").innerHTML = data;
+                document.getElementById("status").innerHTML = "";
                 formatSearchResult(newJsonData,sortMethod);
             }
         });
@@ -54,7 +78,7 @@ function formatSearchResult(jsonData, sortMethod){
     var countNum = 0;
     for (i=0; i < jsonData.length; i++) {
         //var jsonData1 = JSON.parse(jsonData[i]);
-        var jsonData1 = jsonData[i]
+        var jsonData1 = jsonData[i];
         if (jsonData1.viewCount == null && countNum < 20){
             jsonData1.viewCount = "Hidden by video owner";
             jsonData1.likeCount = "Hidden by video owner";
@@ -71,7 +95,7 @@ function formatSearchResult(jsonData, sortMethod){
         if(sortMethod=='likeCount'){
             newHTML += "<div class='rate-name'>Like Count: "+jsonData1.likeCount+"</div>";
         }else if(sortMethod =="hotScore"){
-            newHTML += "<div class='rate-name'>Hot Score: "+jsonData1.viewCount+"</div>";
+            newHTML += "<div class='rate-name'>Hot Score: "+jsonData1.hotScore+"</div>";
         }
                             newHTML += 
                             "<div>Channel Title: "+jsonData1.channelTitle+"</div>"
@@ -82,7 +106,7 @@ function formatSearchResult(jsonData, sortMethod){
                             +"<div>Publish Time: "+jsonData1.publishedAt.substr(0,10)+"</div>"
                         +"</div>"
                     +"<div class='card-actions'>"
-                        +"<paper-button>"
+                        +'<paper-button onclick="postToFacebook(\''+jsonData1.id+'\')">'
                             +"<iron-icon icon='social:share' class='mr-2'></iron-icon>"
                             +"Share to Facebook"
                         +"</paper-button>"

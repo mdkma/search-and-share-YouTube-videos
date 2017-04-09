@@ -1,6 +1,9 @@
 <?php
     session_start();
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/COMP3121/Facebook/src/Facebook/autoload.php';
+	$username = '';
+	$pic = '';
+	$accessToken = '';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/14110562d/Facebook/src/Facebook/autoload.php';
 
     $fb = new Facebook\Facebook([
         'app_id' => '1325805574163170',
@@ -11,6 +14,7 @@
     $helper = $fb->getRedirectLoginHelper();
     try {
         $accessToken = $helper->getAccessToken();
+		echo $accessToken;
     } catch(Facebook\Exceptions\FacebookResponseException $e) {
         echo 'Graph returned an error: ' . $e->getMessage() . '<br>';
     } catch(Facebook\Exceptions\FacebookSDKException $e) {
@@ -19,14 +23,44 @@
     
     if (isset($accessToken)) {
         $fb->setDefaultAccessToken($accessToken);
-        $response = $fb -> get('/me');
+        $response = $fb -> get('/me?fields=id,name,picture.width(200)');
         $user = $response -> getGraphUser();
-        echo 'ID: ' . $user -> getId() . '<br>';
-        echo 'Name: ' . $user -> getName() . '<br>';
-        echo '<img src="//graph.facebook.com/"' . $user -> getId() . '"/picture">';
+		$username = $user -> getName();
+		$temp = $user['picture'];
+		$pic = $temp['url'];
     } else {
         echo 'Failed to retrieve accessToken';
     }
+
+	if (isset($_GET['post'])) {
+		post();
+	}
+	function post(){
+		if (isset($accessToken)) {
+			$fb->setDefaultAccessToken($accessToken);
+			try {
+				// Specify the contents to post on facebook
+				$data = [
+					'link' => 'https://www.comp.polyu.edu.hk/',
+					'message' => 'Have a look at this amazing video!',
+				];
+
+				// Calling the post method to send data to Facebook's feed
+				$response = $fb->post('/me/feed', $data);
+				$post = $response -> getGraphNode();
+				header('Location: https://www.facebook.com/profile.php');
+			} catch(Facebook\Exceptions\FacebookResponseException $e) {
+				echo 'Graph returned an error: ' . $e->getMessage() . '<br>';
+			} catch(Facebook\Exceptions\FacebookSDKException $e) {
+				echo 'Facebook SDK returned an error: ' . $e->getMessage() . '<br>';
+			}
+		} else {
+			$permissions = ['publish_actions'];
+			$callback = 'http://localhost/14110562d/';
+			$loginUrl = $helper->getLoginUrl($callback, $permissions);
+			echo '<a href="' . $loginUrl . '">Log in with Facebook</a>';
+		}
+	}
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +87,13 @@
 	<link rel="import" href="bower_components/iron-form-element-behavior/iron-form-element-behavior.html">
 	<title>Search and Share YouTube Videos</title>
 </head>
+
 <body class="container bg-faded bg-frame">
+<div class="row justify-content-center">
+	<img src=<?php echo $pic; ?> alt="..." class="profile-img mt-3 mb-3"/>
+</div>
+<p class="h1 mt-3 text-center">Welcome, <?php echo $username; ?> </p>
+
 <form is="iron-form" id="searchForm" method="get" action="/14110562d/searchYouTube.php">
     <div class="row justify-content-between align-items-center">
         <paper-input name="q" label="What kind of videos you are interested in?" class="col-6 mb-3" required>
@@ -85,6 +125,29 @@
 <div class="footer mb-3 mt-3">
 	<span>&copy; <a href="http://derek.ma">Derek Mingyu MA</a>. An assignment for PolyU COMP COMP3121. <a href="https://github.com/derekmma/search-and-share-YouTube-videos">Use my code</a>.</span>
 </div>
+
+<script type="text/javascript">
+	var at = "<?php echo $accessToken ?>";
+	function postToFacebook(id){
+		alert('wow1');
+		alert(at);
+		alert(id);
+		var base = 'https://youtu.be/';
+		var linktext = base.concat(id);
+		$.ajax({
+			type: 'POST',
+			url: '/14110562d/post.php',
+			data: { 
+				'accessToken': at,
+				'link': linktext
+			},
+			success: function(data){
+				alert('wow2');
+				alert(data);
+			}
+		});
+}
+</script>
 	
 <style is="custom-style">
 	  paper-button.custom {
@@ -155,8 +218,9 @@
           		greeting.textContent = 'Hello, ' + input.value;
         	});
       	});
+    });
+}
 	</script>
-	
 	
 </body>
 </html>
