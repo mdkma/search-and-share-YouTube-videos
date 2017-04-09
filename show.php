@@ -118,8 +118,7 @@
 	paper-card.record { @apply(--layout-horizontal); }
 	.record-iframe {
 		width: 400px;
-		height: 170px;
-		background: url('./donuts.png');
+		background: black;
 		background-size: cover;
 	}
 	.record-content {
@@ -144,6 +143,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 	<script src="base.js" type="text/javascript" chatset="utf-8"></script>
 	<script>
+		//document.getElementByClassName('record-iframe').style.height=document.getElementByClassName('record').style.height;
     	// To ensure that elements are ready on polyfilled browsers, 
     	// wait for WebComponentsReady. 
     	document.addEventListener('WebComponentsReady', function() {

@@ -12,11 +12,11 @@ function sortBy(prop){
 }
 
 function sortByViewCount(x,y) {
-    return y.viewCount - x.viewCount; 
+    return y.viewCount - x.viewCount;
 }
 
 function sortByLikeCount(x,y) {
-    return y.likeCount - x.likeCount; 
+    return y.likeCount - x.likeCount;
 }
 
 function getSearchResult(){
@@ -39,8 +39,8 @@ function getSearchResult(){
                 }else if(sortMethod =="hotScore"){
                     newJsonData.sort(sortByViewCount);
                 }
-                document.getElementById("status").innerHTML = "";
-                formatSearchResult(newJsonData);
+                document.getElementById("status").innerHTML = data;
+                formatSearchResult(newJsonData,sortMethod);
             }
         });
         e.preventDefault(); // avoid to execute the actual submit of the form.
@@ -49,7 +49,7 @@ function getSearchResult(){
     
 }
 
-function formatSearchResult(jsonData){
+function formatSearchResult(jsonData, sortMethod){
     newHTML = "";
     var countNum = 0;
     for (i=0; i < jsonData.length; i++) {
@@ -62,17 +62,24 @@ function formatSearchResult(jsonData){
             jsonData1.commentCount = "Hidden by video owner";
         }
         newHTML += "<paper-card animated-shadow class='record mt-3 md-3'>"
-                        +"<div class='record-iframe'></div>"
+                        +"<div class='record-iframe'>"
+                            +"<iframe width='400' height='300' src='https://www.youtube.com/embed/"+jsonData1.id+"' frameborder='0' allowfullscreen></iframe>"
+                        +"</div>"
                     +"<div class='record-content'>"
                         +"<div class='card-content'>"
-                            +"<div class='rate-header'>"+jsonData1.title+"</div>"
-                            +"<div class='rate-name'>"+jsonData1.id+"</div>"
-                            +"<div>Channel Title: "+jsonData1.channelTitle+"</div>"
+                            +"<div class='rate-header'>"+jsonData1.title+"</div>";
+        if(sortMethod=='likeCount'){
+            newHTML += "<div class='rate-name'>Like Count: "+jsonData1.likeCount+"</div>";
+        }else if(sortMethod =="hotScore"){
+            newHTML += "<div class='rate-name'>Hot Score: "+jsonData1.viewCount+"</div>";
+        }
+                            newHTML += 
+                            "<div>Channel Title: "+jsonData1.channelTitle+"</div>"
                             +"<div>View Count: "+jsonData1.viewCount+"</div>"
                             +"<div>Like Count: "+jsonData1.likeCount+"</div>"
                             +"<div>Dislike Count: "+jsonData1.dislikeCount+"</div>"
                             +"<div>Comment Count: "+jsonData1.commentCount+"</div>"
-                            +"<div>Publish Time: "+jsonData1.pubslishAt+"</div>"
+                            +"<div>Publish Time: "+jsonData1.publishedAt.substr(0,10)+"</div>"
                         +"</div>"
                     +"<div class='card-actions'>"
                         +"<paper-button>"
@@ -82,6 +89,7 @@ function formatSearchResult(jsonData){
                     +"</div>"
                 +"</div>"
                 +"</paper-card>";
+        newHTML += "";
         countNum = countNum + 1;
     }
 
