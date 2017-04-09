@@ -48,9 +48,9 @@
 	<title>Search and Share YouTube Videos</title>
 </head>
 <body class="container bg-faded bg-frame">
-<form is="iron-form" id="searchForm" method="post" action="/14110562d/searchYouTube.php">
+<form is="iron-form" id="searchForm" method="get" action="/14110562d/searchYouTube.php">
     <div class="row justify-content-between">
-        <paper-input name="query" label="What kind of videos you are interested in?" class="col-6" required>
+        <paper-input name="q" label="What kind of videos you are interested in?" class="col-6" required>
             <iron-icon icon="icons:search" class="mr-2" prefix></iron-icon>
         </paper-input>
         <paper-dropdown-menu name="method" label="Sort by" class="col-3" required>

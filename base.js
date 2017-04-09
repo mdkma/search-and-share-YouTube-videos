@@ -7,12 +7,13 @@ function getSearchResult(){
     
     $("#searchForm").submit(function(e) {
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: '/14110562d/searchYouTube.php',
-            data: $('searchForm').serialize(),
+            data: $('#searchForm').serialize(),
             success: function (data, textStatus, jqXHR) {
-                alert('Form was submitted');
-                alert(data);
+                var jsonData = JSON.parse(data);
+                //alert(jsonData[2]);
+                document.getElementById("status").innerHTML = jsonData[2];
             }
         });
         e.preventDefault(); // avoid to execute the actual submit of the form.
