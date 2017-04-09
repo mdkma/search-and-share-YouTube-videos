@@ -48,7 +48,7 @@
 	<title>Search and Share YouTube Videos</title>
 </head>
 <body class="container bg-faded bg-frame">
-<form is="iron-form" id="searchForm" method="post" action="/ai3-web-app/Info">
+<form is="iron-form" id="searchForm" method="post" action="/14110562d/searchYouTube.php">
     <div class="row justify-content-between">
         <paper-input name="query" label="What kind of videos you are interested in?" class="col-6" required>
             <iron-icon icon="icons:search" class="mr-2" prefix></iron-icon>
@@ -65,7 +65,7 @@
     </div>
 </form>
 <div id="status"></div>
-<div id="search-re sult">
+<div id="search-result">
 	<paper-card animated-shadow class="record">
 		<div class="record-iframe"></div>
 	<div class="record-content">
@@ -144,7 +144,7 @@
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-	<script src="js/base.js" type="text/javascript" chatset="utf-8"></script>
+	<script src="base.js" type="text/javascript" chatset="utf-8"></script>
 	<script>
     	// To ensure that elements are ready on polyfilled browsers, 
     	// wait for WebComponentsReady. 
