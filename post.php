@@ -8,7 +8,6 @@
         'default_graph_version' => 'v2.5'
     ]);
     $accessToken = $_POST['accessToken'];
-    echo "<script>console.log('haha');</script>";
     /*
     $helper = $fb->getRedirectLoginHelper();
     
@@ -38,11 +37,6 @@
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
             echo 'Facebook SDK returned an error: ' . $e->getMessage() . '<br>';
         }
-    } else {
-        $permissions = ['publish_actions'];
-        $callback = 'http://localhost/14110562d/post.php';
-        $loginUrl = $helper->getLoginUrl($callback, $permissions);
-        echo '<a href="' . $loginUrl . '">Log in with Facebook</a>';
     }
-echo "good!!";
+echo "200";
 ?>

@@ -14,7 +14,6 @@
     $helper = $fb->getRedirectLoginHelper();
     try {
         $accessToken = $helper->getAccessToken();
-		echo $accessToken;
     } catch(Facebook\Exceptions\FacebookResponseException $e) {
         echo 'Graph returned an error: ' . $e->getMessage() . '<br>';
     } catch(Facebook\Exceptions\FacebookSDKException $e) {
@@ -129,11 +128,9 @@
 <script type="text/javascript">
 	var at = "<?php echo $accessToken ?>";
 	function postToFacebook(id){
-		alert('wow1');
-		alert(at);
-		alert(id);
 		var base = 'https://youtu.be/';
 		var linktext = base.concat(id);
+		alert('Share Done!');
 		$.ajax({
 			type: 'POST',
 			url: '/14110562d/post.php',
@@ -141,9 +138,7 @@
 				'accessToken': at,
 				'link': linktext
 			},
-			success: function(data){
-				alert('wow2');
-				alert(data);
+			success: function(){
 			}
 		});
 }
