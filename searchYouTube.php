@@ -48,7 +48,7 @@ if (isset($_GET['q'])) {
     }
 
     $videoIds = join(',',$listResult);
-    $videosResponse = $youtube->videos->listVideos('snippet, statistics', array(
+    $videosResponse = $youtube->videos->listVideos('id, contentDetails, snippet, statistics', array(
       'id' => $videoIds,
     ));
 

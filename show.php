@@ -36,29 +36,43 @@
 	<link rel="stylesheet" media="screen" href="css/base.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 	<meta charset="UTF-8">
+	<link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
+	<link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
+	<link rel="import" href="bower_components/iron-form/iron-form.html">
 	<link rel="import" href="bower_components/iron-icons/social-icons.html">
 	<link rel="import" href="bower_components/iron-icons/iron-icons.html">
 	<link rel="import" href="bower_components/paper-input/paper-input.html">
+	<!--
 	<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 	<link rel="import" href="bower_components/paper-item/paper-item.html">
 	<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+	-->
 	<link rel="import" href="bower_components/paper-button/paper-button.html">
 	<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
 	<link rel="import" href="bower_components/paper-card/paper-card.html">
+	<link rel="import" href="bower_components/iron-form-element-behavior/iron-form-element-behavior.html">
 	<title>Search and Share YouTube Videos</title>
 </head>
 <body class="container bg-faded bg-frame">
 <form is="iron-form" id="searchForm" method="get" action="/14110562d/searchYouTube.php">
-    <div class="row justify-content-between">
-        <paper-input name="q" label="What kind of videos you are interested in?" class="col-6" required>
+    <div class="row justify-content-between align-items-center">
+        <paper-input name="q" label="What kind of videos you are interested in?" class="col-6 mb-3" required>
             <iron-icon icon="icons:search" class="mr-2" prefix></iron-icon>
         </paper-input>
-        <paper-dropdown-menu name="method" label="Sort by" class="col-3" required>
+		<label id="label1" class="mt-2">Sort by:</label>
+		<paper-radio-group name="sort-method" id="sort-method" aria-labelledby="label1" selected="likeCount" class="col4">
+			<paper-radio-button name="likeCount">Like Count</paper-radio-button>
+			<paper-radio-button name="hotScore">Hot Score</paper-radio-button>
+		</paper-radio-group>
+		<!--
+        <paper-dropdown-menu name="method" id="sort-method" label="Sort by" attr-for-selected="value" selected="{{methodtemp}}" class="col-3" required>
             <paper-listbox class="dropdown-content">
-                <paper-item>Decreasing like count</paper-item>
-                <paper-item>Hot content score</paper-item>
+                <paper-item value="likeCount">Decreasing like count</paper-item>
+                <paper-item value="hotScore">Hot content score</paper-item>
             </paper-listbox>
         </paper-dropdown-menu>
+		<input type="hidden" name="sort-method-real" value="{{methodtemp}}">
+		-->
         <paper-button raised id="submitButton" onclick="getSearchResult()" class="col-2 custom indigo">
             Search
         </paper-button>
@@ -66,22 +80,6 @@
 </form>
 <div id="status"></div>
 <div id="search-result">
-	<paper-card animated-shadow class="record">
-		<div class="record-iframe"></div>
-	<div class="record-content">
-		<div class="card-content">
-			<div class="rate-header">Rate this album</div>
-			<div class="rate-name">Mac Miller</div>
-			<div>Live from space</div>
-		</div>
-		<div class="card-actions">
-			<paper-button>
-				<iron-icon icon="social:share" class="mr-2"></iron-icon>
-				Share to Facebook
-			</paper-button>
-		</div>
-	</div>
-	</paper-card>
 </div
 
 <div class="footer mb-3 mt-3">
