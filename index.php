@@ -4,7 +4,7 @@
     session_start();
     
     // Load Facebook SDK with autoloading
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/COMP3121/Facebook/src/Facebook/autoload.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/14110562d/Facebook/src/Facebook/autoload.php';
 
     // Configure Facebook App ID and App Secret
     $fb = new Facebook\Facebook([
